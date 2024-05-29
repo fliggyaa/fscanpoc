@@ -1,0 +1,8 @@
+name: weaver-ecology-ofslogin-aul
+rules:
+  - method: GET
+    path: "/mobile/plugin/1/ofsLogin.jsp?syscode=syscode&timestamp=2&gopage=3&receiver=test&loginTokenFromThird="
+    expression: |
+      response.status == 200 && response.body.bcontains(b"location.replace") && response.body.bcontains(b"/login/Login.jsp") 
+detail:
+  author: 666

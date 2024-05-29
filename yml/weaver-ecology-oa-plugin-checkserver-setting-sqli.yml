@@ -1,0 +1,8 @@
+name: weaver-ecology-oa-plugin-checkserver-setting-sqli
+rules:
+  - method: GET
+    path: "/mobile/plugin/CheckServer.jsp?type=mobileSetting"
+    expression: |
+      response.status == 200 && response.body.bcontains(b'"error":"system error"') && response.headers["content-type"].contains("application/json") && !response.raw_header.bcontains(b"securityIntercept")
+detail:
+  author: 666

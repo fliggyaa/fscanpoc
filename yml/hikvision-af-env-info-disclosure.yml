@@ -1,0 +1,8 @@
+name: hikvision-af-env-info-disclosure
+rules:
+  - method: GET
+    path: "/artemis-portal/artemis/env"
+    expression: |
+      response.status == 200 && response.body.bcontains(b'"profiles":') && response.body.bcontains(b'"server.ports":')
+detail:
+  author: 666

