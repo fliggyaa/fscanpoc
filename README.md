@@ -107,6 +107,7 @@ poc-yisaitong-rce
 poc-yisaitong-S2-fileupload
 poc-yisaitong-SC-fileupload
 poc-yisaitong-update-sqli
+poc-yml-magic-api-unauth
 ```
 
 
