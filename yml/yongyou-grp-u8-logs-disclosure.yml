@@ -1,0 +1,8 @@
+name: yongyou-grp-u8-logs-disclosure
+rules:
+  - method: GET
+    path: "/logs/info.log"
+    expression: |
+      response.status == 200 && response.body.bcontains(b' - [ INFO ]  write')
+detail: 
+  author: 666

