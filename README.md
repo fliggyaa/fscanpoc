@@ -148,3 +148,8 @@ poc-yml-magic-api-unauth
 ## 仅供技术研究使用，请勿用于非法用途，否则后果作者概不负责
 
 ## This is for technical research only, please do not use it for illegal purposes, otherwise the author will not be responsible for the consequences.
+
+## 如果存在误报可以添加作者进行排查解决，感谢您的支持
+
+![image](https://github.com/fliggyaa/fscanpoc/assets/82925172/fa29250c-6591-423d-acb4-6c74aa5157ce)
+
