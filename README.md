@@ -4,7 +4,36 @@
 
 如果有需求，联系作者获取。
 
+感谢以下师傅对问题的提交
+s1g0day cross
+
 更新
+```
+1.修改了一部分报错的poc，由于在代码中加入了反引号导致的poc报错
+2.修改了一些引号滥用问题
+wanhu-OA-ezOffice-RhinoScriptEngineService-rce
+yongyou-ksoa-sKeyvalue-sqli
+
+3.删除了一部分时间注入的POC，这里由于fscan无法测试时间注入，因此在寻找到更好的方法后重新引入
+yonyou-UFIDA-NC-pagesServlet-sqli
+hongjing-hcm-pos_dept_post-sql-injection
+yonyou-grp-u8-bx_dj_check-sql-injection
+yonyou-grp-u8-u8qx-sql-injection
+weaver-ecology-filedownloadforoutdoc-sqli
+yongyou-grp-u8-bx_historyDataChecks-sqli
+poc-yaml-FZMediaEditor-binary-SQL-injection
+poc-yaml-yisaitong-secretkeyservice-sql-injection
+poc-yaml-yisaitong-JLockSeniorDao-findByLockName-dwr-sql-injection
+poc-yisaitong-update-sqli
+
+4.关于误报poc建议师傅们自己选择是否保留
+alibaba-nacos-config-download
+alibaba-nacos-sync-unauth
+DH-DSS-user_edit_action-Information-disclosure
+
+```
+
+
 ```
 poc-yaml-SpringBlade-tenant-list-sqli
 hongjing-hcm-pos_dept_post-sql-injection
