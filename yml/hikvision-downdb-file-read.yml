@@ -1,8 +1,0 @@
-name: hikvision-downdb-file-read
-rules:
-  - method: GET
-    path: "/localDomain/downdb.php?fileName=web/html/data/login.php"
-    expression: |
-      response.status == 200 && response.body.bcontains(b'password')
-detail:
-  author: 666
