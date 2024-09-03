@@ -1,0 +1,9 @@
+name: poc-finger-geoserver
+rules:
+  - method: GET
+    path: "/geoserver/web/"
+    expression: |
+      response.status == 200 && response.body.bcontains(b'<title>GeoServer')
+detail:
+  author: fliggy
+  descriptions: geoserver指纹识别
