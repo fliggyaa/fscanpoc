@@ -9,6 +9,14 @@ s1g0day、cross
 
 更新
 ```
+增加
+poc-finger-geoserver
+poc-geoserver-cve-2024-36401-rce
+这里在测试时发现由于延迟问题导致未发现漏洞问题，但是没有确定是否为特例，需要在测试时关注
+```
+
+
+```
 1.修改了一部分报错的poc，由于在代码中加入了反引号导致的poc报错
 2.修改了一些引号滥用问题
 wanhu-OA-ezOffice-RhinoScriptEngineService-rce
