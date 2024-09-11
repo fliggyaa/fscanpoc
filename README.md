@@ -9,6 +9,29 @@ s1g0day、cross
 
 更新
 ```
+本次更新首次使用了<response.body != "">的语法，但是没有验证表达式是否有效，如果无法使用，感谢及时反馈。
+
+更新了2024HW期间海康威视、亿赛通、用友的部分POC
+hikvision-iSecure-Cente-clusters-fileupload
+hikvision-iSecure-Cente-detection-Rce
+hikvision-iSecure-Cente-licenseExpire-Rce
+hikvision-iSecure-Cente-uploadAllPackage-fileupload
+yisaitong-CDG-DecryptionApp-deserialization-rce
+yisaitong-CDG-docRenewApp-deserialization-rce
+yisaitong-CDG-druid-submitLogin-defaultpasswd
+yisaitong-CDG-getAllUsers-info-leak
+yisaitong-CDG-SecureUsbConnection-deserialization-rce
+yonyou-crm-help-fileread
+yonyou-crm-reservationcomplete-rce
+yonyou-NC-cloud-queryPsnInfo-sqli
+yonyou-NC-cloud-queryStaffByName-sqli
+yonyou-UFIDA-NC-fileupload-rce
+yonyou-UFIDA-NC-querygoodsgridbycode-sqli
+```
+
+
+
+```
 增加
 poc-finger-geoserver
 poc-geoserver-cve-2024-36401-rce
